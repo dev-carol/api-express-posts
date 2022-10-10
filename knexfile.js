@@ -3,11 +3,11 @@ module.exports = {
     client: 'mysql',
     connection: {
       timezone: 'utc',
-      host: '127.0.0.1',
-      port: '3306',
-      database: 'nodejs',
-      user:     'root',
-      password: '123',
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      database: process.env.DB_DATABASE,
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
     },
     migrations: {
       directory: './src/database/migrations',
