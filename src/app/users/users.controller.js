@@ -1,15 +1,15 @@
 const {Router} = require('express');
 const { postsService } = require('../posts/posts.service');
 const { usersService } = require('./users.service');
+const {authenticateToken} = require('../helpers/auth');
 
 const UsersRouter = Router()
 
-UsersRouter.get('/v1/users', async (req, res) => {
+UsersRouter.get('/v1/users', authenticateToken, async (req, res) => {
     const users = await usersService.findAll();
 
     return res.status(200).json({users});
 });
-
 
 UsersRouter.post('/v1/users', async (req, res) => {
     const {body} = req;
