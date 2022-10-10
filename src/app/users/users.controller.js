@@ -30,9 +30,12 @@ UsersRouter.get('/v1/users/:id',async  (req, res) => {
 UsersRouter.put('/v1/users/:id',async  (req, res) => {
     const {id} = req.params;
 
-    const {body} = req
-
-    const user = await usersService.update(id, body);
+    const {body} = req;
+    
+    const user = await usersService.update({
+       ...user,
+       updated_at: new Date(),
+    });
 
     return res.status(200).json(user);
 });
