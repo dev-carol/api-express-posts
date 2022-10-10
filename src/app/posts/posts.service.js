@@ -3,7 +3,7 @@ const { v4: uuid } = require("uuid");
 
 class PostsService {
   async findAll() {
-    return await database("posts");
+    return await database("posts").select('posts.*', 'users.first_name', 'users.last_name').leftJoin('users','posts.user_id', 'users.id');
   }
 
   async create(post) {
@@ -20,6 +20,10 @@ class PostsService {
 
   async findOneById(id) {
     return await database('posts').where({id}).first();
+  }
+
+  async findPostsByUserId(userId) {
+    return await database('posts').where({user_id: userId});
   }
 
   async deleteById(id) {
